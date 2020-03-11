@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2020 at 05:42 PM
+-- Generation Time: Mar 11, 2020 at 05:13 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -45,7 +45,7 @@ CREATE TABLE `books` (
 INSERT INTO `books` (`id`, `title`, `price`, `typebooks_id`, `image`, `created_at`, `updated_at`) VALUES
 (1, 'การ์ตูน naroto', '200.00', 2, 'nopic.png', '2020-03-03 14:51:02', '2020-03-26 14:51:02'),
 (2, 'สามก๊ก', '300.00', 1, 'nopic.png', '2020-03-05 14:51:02', '2020-03-05 14:51:02'),
-(3, 'บัญชีเบื้องต้น', '500.00', 4, 'nopic.png', '2020-03-24 14:52:19', '2020-03-31 14:52:19'),
+(3, 'บัญชีเบื้องต้น', '1000.00', 4, 'nopic.png', '2020-03-24 14:52:19', '2020-03-06 13:16:31'),
 (5, 'รักนะจุ๊บๆ', '20.00', 2, 't2fGRxkGA7.png', '2020-03-03 16:38:33', '2020-03-03 16:38:33'),
 (6, 'อรอุมา', '100.00', 2, 'bqneRjZTxn.png', '2020-03-03 16:39:27', '2020-03-03 16:39:27');
 
@@ -82,6 +82,26 @@ CREATE TABLE `password_resets` (
   `token` varchar(191) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profiles`
+--
+
+CREATE TABLE `profiles` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `tel` text DEFAULT NULL,
+  `status` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `profiles`
+--
+
+INSERT INTO `profiles` (`id`, `tel`, `status`) VALUES
+(1, '0874830182', 'admin'),
+(2, '1234567890', NULL);
 
 -- --------------------------------------------------------
 
@@ -134,7 +154,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Onuma Ritngam', 'nuchnum65@gmail.com', NULL, '$2y$10$BpSNmRWiU3jhoSUk05/AvO/dmA3G8o3JIpBqSwRbwS8nvAhvBU/IW', NULL, '2020-03-03 14:10:45', '2020-03-03 14:10:45');
+(1, 'Onuma Ritngam', 'nuchnum65@gmail.com', NULL, '$2y$10$BpSNmRWiU3jhoSUk05/AvO/dmA3G8o3JIpBqSwRbwS8nvAhvBU/IW', 'xSYDiMh17T93pRwLgBm27fCldeXikFs0270dQRz2ObqDtOvgwqi4SrrokPNq', '2020-03-03 14:10:45', '2020-03-03 14:10:45'),
+(2, 'bongbong', 'bongbong@bongbong.com', NULL, '$2y$10$DQMOJNK8i9hkuaxfnLxxKeOCXbhq/jAXf./MbyOOC7HvzcgU0iMn2', 'vAjv0kkY9Wgh9tUOR69xyQI8d845MVLYfNFpHyLEJEDAKyqBwQ0ag0S0fSYl', '2020-03-11 14:17:58', '2020-03-11 15:16:58');
 
 --
 -- Indexes for dumped tables
@@ -160,6 +181,12 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `profiles`
+--
+ALTER TABLE `profiles`
+  ADD KEY `profiles_ibfk_1` (`id`);
+
+--
 -- Indexes for table `typebooks`
 --
 ALTER TABLE `typebooks`
@@ -180,7 +207,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -198,7 +225,7 @@ ALTER TABLE `typebooks`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -209,6 +236,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `books`
   ADD CONSTRAINT `books_typebooks_id_foreign` FOREIGN KEY (`typebooks_id`) REFERENCES `typebooks` (`id`);
+
+--
+-- Constraints for table `profiles`
+--
+ALTER TABLE `profiles`
+  ADD CONSTRAINT `profiles_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

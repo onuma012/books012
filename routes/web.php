@@ -15,8 +15,7 @@ Route::get('about','SiteController@index')->name('about');
 Route::get('typebooks','TypeBooksController@index')->name('typebooks');
 Route::get('typebooks/destroy/{id}', 'TypeBooksController@destroy');
 
-// ตั้งชื่อ method index ว่า books
-Route::resource('books', 'BooksController')->name('index', 'books');
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,4 +23,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// ตั้งชื่อ method index ว่า books
+Route::resource('books', 'BooksController')->name('index', 'books');
+Route::resource('profiles','ProfilesController');
+Route::resource('admin','AdminController');
 Route::get('/home', 'HomeController@index')->name('home');

@@ -9,6 +9,10 @@ use Image;//เรียกใช้ library จัดการรูปภา�
 use File;
 class BooksController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+        //$this->middleware('auth', ['except' => ['index']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -131,4 +135,6 @@ class BooksController extends Controller
         return redirect()->action('BooksController@index');
 
     }
+
+
 }
